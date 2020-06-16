@@ -1,0 +1,60 @@
+version: "3"
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./services/nginx/conf.d:/etc/nginx/conf.d:cached
+      - ./wwwroot:/wwwroot:cached
+      # - ~/workspace/docker/php74/sock:/sock:cached
+    networks:
+      dev: 
+        ipv4_address: 172.19.0.2
+
+
+  php:
+    container_name: php72
+    build:
+      context: ./services/php
+      args:
+        - PHP_VER=7.2-fpm # php版本
+    # image: registry.cn-qingdao.aliyuncs.com/xfee/php74:1.0
+    restart: always
+    depends_on: 
+      - nginx
+    volumes:
+      - ./wwwroot:/wwwroot:cached
+      # - ~/workspace/docker/php74/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:cached
+      # - ~/workspace/docker/php74/sock:/sock:cached
+    networks:
+        dev: 
+          ipv4_address: 172.19.0.10
+
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    restart: always
+    depends_on: 
+      - php
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      # - ~/workspace/docker/mysql/conf:/etc/mysql  
+      - ./data/mysql/data:/var/lib/mysql:rw
+    networks:
+      dev: 
+        ipv4_address: 172.19.0.20
+
+
+networks:
+  dev:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.19.0.0/16
