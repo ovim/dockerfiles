@@ -17,7 +17,7 @@
 --- sercices | 服务软件配置包
 --- --- nginx | latest
 --- ---  --- conf.d | nginx配置文件
---- --- php | 7.0-fpm/7.2-fpm可用的Dockerfiles
+--- --- php | 7.0-fpm/7.2-fpm可用的Dockerfile
 --- wwwroot | php 应用目录
 --- --- default | 默认文件
 --- docker-compose.yml | gather for nmp
