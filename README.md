@@ -14,13 +14,16 @@
 --- data | 数据库文件存储
 --- --- mysql | mysql数据库文件
 --- docs | 使用文档
+--- gather | 常用集合
+--- --- nmp | Nginx、MySQL、PHP
+--- ---  --- v1 | 
+--- ---  --- v2 | 
 --- sercices | 服务软件配置包
 --- --- nginx | latest
 --- ---  --- conf.d | nginx配置文件
 --- --- php | 7.0-fpm/7.2-fpm可用的Dockerfile
 --- wwwroot | php 应用目录
 --- --- default | 默认文件
---- docker-compose.yml | gather for nmp
 
 ## 文档
 
