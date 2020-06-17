@@ -21,7 +21,11 @@ cd dockerfiles
 
 ## 启动
 
-1、进入程序目录
+1、进入程序目录([V1与V2对比](../../gather/nmp/README.md))
+
+```
+cd /path/gather/nmp/(v1/v2)
+```
 
 2、 执行安装/启动
 
