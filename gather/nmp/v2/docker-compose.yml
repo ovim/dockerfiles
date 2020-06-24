@@ -9,6 +9,7 @@ services:
     volumes:
       - ../../../services/nginx/conf.d:/etc/nginx/conf.d:cached
       - ../../../wwwroot:/wwwroot:cached
+      #- ../../../services/nginx/nginx.conf:/etc/nginx/nginx.conf:cached
     networks:
       dev: 
         ipv4_address: 172.19.0.2
