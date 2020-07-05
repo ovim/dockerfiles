@@ -8,6 +8,7 @@ services:
       - "80:80"
     volumes:
       # - /etc/localtime:/etc/localtime:cached
+      - ../../../logs/nginx:/var/log/nginx:cached
       - ../../../services/nginx/conf.d:/etc/nginx/conf.d:cached
       - ../../../wwwroot:/wwwroot:cached
       #- ../../../services/nginx/nginx.conf:/etc/nginx/nginx.conf:cached
