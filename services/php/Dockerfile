@@ -43,3 +43,12 @@ RUN docker-php-ext-install \
         --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && rm -r /var/lib/apt/lists/*
+
+#pecl安装redis扩展
+RUN pecl install -o -f redis  \
+    && rm -rf /tmp/pear
+
+#redis加入php扩展
+RUN cd /usr/local/etc/php \
+    && cp php.ini-development php.ini \
+    && echo "extension=redis.so" >> /usr/local/etc/php/php.ini
