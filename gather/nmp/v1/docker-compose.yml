@@ -3,7 +3,7 @@ services:
   nginx:
     container_name: nginx
     build:
-      context: ../../services/nginx
+      context: ../../../services/nginx
       args:
         - NGINX_VER=latest
     restart: always
