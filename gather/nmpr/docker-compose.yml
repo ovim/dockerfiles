@@ -17,7 +17,7 @@ services:
       - ../../wwwroot:/wwwroot:cached
       #- ../../services/nginx/nginx.conf:/etc/nginx/nginx.conf:cached
       ## SSL 证书目录挂载
-      - ../../../services/nginx/certs:/etc/nginx/certs:cached
+      - ../../services/nginx/certs:/etc/nginx/certs:cached
     networks:
       dev: 
         ipv4_address: 172.19.0.2
