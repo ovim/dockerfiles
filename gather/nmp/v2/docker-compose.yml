@@ -2,7 +2,10 @@ version: "3"
 services:
   nginx:
     container_name: nginx
-    image: nginx:latest
+    build:
+      context: ../../services/nginx
+      args:
+        - NGINX_VER=latest
     restart: always
     ports:
       - "80:80"
