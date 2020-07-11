@@ -15,13 +15,13 @@ RUN apt-get update && apt-get install -y \
         wget
 
 # 安装模块
-unzip nginx-upstream-fair-master.zip #解压
-mv nginx-upstream-fair-master nginx-upstream-fair #重命名
+#unzip nginx-upstream-fair-master.zip #解压
+#mv nginx-upstream-fair-master nginx-upstream-fair #重命名
 
 #配置
-./configure \
---prefix=/usr/sbin/nginx \
---with-http_ssl_module \
---add-module=/root/nginx-upstream-fair
+#./configure \
+#--prefix=/usr/sbin/nginx \
+#--with-http_ssl_module \
+#--add-module=/root/nginx-upstream-fair
 #编译安装
-make && make install
+#make && make install
