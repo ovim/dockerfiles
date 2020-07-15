@@ -4,7 +4,7 @@ services:
     container_name: elasticsearch
     build:
       context: .
-      args:·
+      args:
         - ES_VER=7.3.2
     ports:
       - "9200:9200"
