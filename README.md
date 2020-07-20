@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-07-07 19:26:37
+ * @LastEditTime: 2020-07-20 12:11:42
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /workspace/README.md
+--> 
 ## Dockerfiles
 
 搭建基础公用环境包，方便使用，支持业务不断的提升而需要一些软件的支持但由于本身不懂或耗时导致不方便安装升级的一种解决方案
@@ -20,6 +28,7 @@
 --- ---  --- v2 | 
 --- --- nmpr | Nignx、MySQL、PHP、Redis
 --- sercices | 服务软件配置包
+--- --- elasticsearch | 7.3.2
 --- --- nginx | latest
 --- ---  --- conf.d | nginx配置文件
 --- --- php | 7.0-fpm/7.2-fpm可用的Dockerfile

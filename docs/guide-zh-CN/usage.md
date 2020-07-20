@@ -57,3 +57,8 @@ docker-compose up -d
 
 更多可以去看 [常用命令](start-command.md)
 
+## Elasticsearch 启动
+
+`cd /yourPath/services/elasticsearch/`
+
+`docker-compose up -d`
