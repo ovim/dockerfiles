@@ -11,9 +11,9 @@ services:
       - "80:80"
     volumes:
       # - /etc/localtime:/etc/localtime:cached
-      - ../../../logs/nginx:/var/log/nginx:cached
-      - ../../../services/nginx/conf.d:/etc/nginx/conf.d:cached
-      - ../../../wwwroot:/wwwroot:cached
+      - ../../../logs/nginx:/var/log/nginx:rw
+      - ../../../services/nginx/conf.d:/etc/nginx/conf.d:rw
+      - ../../../wwwroot:/wwwroot:rw
       #- ../../../services/nginx/nginx.conf:/etc/nginx/nginx.conf:cached
     networks:
       dev: 
@@ -27,7 +27,7 @@ services:
     depends_on: 
       - nginx
     volumes:
-      - ../../../wwwroot:/wwwroot:cached
+      - ../../../wwwroot:/wwwroot:rw
     networks:
         dev: 
           ipv4_address: 172.19.0.10
@@ -39,7 +39,7 @@ services:
     depends_on: 
       - nginx
     volumes:
-      - ../../../wwwroot:/wwwroot:cached
+      - ../../../wwwroot:/wwwroot:rw
     networks:
         dev: 
           ipv4_address: 172.19.0.11
@@ -50,7 +50,7 @@ services:
     depends_on:
       - nginx
     volumes:
-      - ../../../wwwroot:/wwwroot:cached
+      - ../../../wwwroot:/wwwroot:rw
     networks:
         dev:
           ipv4_address: 172.19.0.12
