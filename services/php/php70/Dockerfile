@@ -56,11 +56,11 @@ RUN cd /usr/local/etc/php \
     && echo "extension=redis.so" >> /usr/local/etc/php/php.ini
 
 # 安装 Composer
-ENV COMPOSER_HOME /root/composer
+# ENV COMPOSER_HOME /root/composer
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
+# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
 
-RUN composer config -g repo.packagist composer ${COMPOSER_URL}
+# RUN composer config -g repo.packagist composer ${COMPOSER_URL}
 
 # RUN composer global require "fxp/composer-asset-plugin:^1.4.0"
