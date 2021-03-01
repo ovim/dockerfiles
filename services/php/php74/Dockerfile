@@ -47,4 +47,4 @@ ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
 
 RUN composer config -g repo.packagist composer ${COMPOSER_URL}
 
-RUN composer global require "fxp/composer-asset-plugin:^1.4.0"
+# RUN composer global require "fxp/composer-asset-plugin:^1.4.0"
