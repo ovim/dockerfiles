@@ -1,4 +1,5 @@
 ARG PHP_VER
+ARG COMPOSER_URL
 
 # 镜像包
 FROM php:${PHP_VER}
@@ -53,3 +54,13 @@ RUN pecl install -o -f redis  \
 RUN cd /usr/local/etc/php \
     && cp php.ini-development php.ini \
     && echo "extension=redis.so" >> /usr/local/etc/php/php.ini
+
+# 安装 Composer
+ENV COMPOSER_HOME /root/composer
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
+
+RUN composer config -g repo.packagist composer ${COMPOSER_URL}
+
+RUN composer global require "fxp/composer-asset-plugin:^1.4.0"
