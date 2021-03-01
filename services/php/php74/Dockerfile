@@ -37,7 +37,7 @@ RUN docker-php-ext-install \
         opcache \
         intl \
         exif \
-        bcmath \
+        bcmath
 
 # 安装 Composer
 ENV COMPOSER_HOME /root/composer
