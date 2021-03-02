@@ -9,19 +9,7 @@ services:
         - PHP_VER=7.2-fpm # php版本
         - COMPOSER_URL=https://mirrors.aliyun.com/composer/ # composer源url
     restart: always
-    depends_on:
-      - nginx
     volumes:
       - ../../../wwwroot:/wwwroot:rw
       - ../../../services/php/php72/php.ini:/usr/local/etc/php/php.ini:rw
       - ../../../services/php/php72/conf.d:/usr/local/etc/php/conf.d:rw
-    networks:
-      dev:
-        ipv4_address: 172.19.0.72
-
-networks:
-  dev:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.19.0.0/16
