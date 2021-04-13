@@ -53,7 +53,7 @@ services:
   #      #      - ../services/php/php73/conf.d:/usr/local/etc/php/conf.d:rw
   #    networks:
   #      dev:
-  #        ipv4_address: 172.19.0.10
+  #        ipv4_address: 172.19.0.12
 
   php72:
     container_name: php72
