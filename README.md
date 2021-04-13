@@ -22,23 +22,23 @@
 --- data | 数据库文件存储
 --- --- mysql | mysql数据库文件
 --- docs | 使用文档
---- gather | 常用集合
---- --- nmp | Nginx、MySQL、PHP
---- ---  --- v1 | 
---- ---  --- v2 | 
---- --- nmpr | Nignx、MySQL、PHP、Redis
+--- gather | 快速启动包
+--- --- docker-compose.yml | 一键启动 NMP（具体的启动项可编辑文件自由配置）
 --- sercices | 服务软件配置包
---- --- elasticsearch | 7.3.2
---- --- nginx | latest
---- ---  --- conf.d | nginx配置文件
---- --- php | 7.0-fpm/7.2-fpm可用的Dockerfile
---- --- redis | 可自定义版本号
---- wwwroot | php 应用目录
---- --- default | 默认文件
+--- --- elasticsearch | ElasticSearch 7.3.2
+--- --- nginx | Nginx 服务
+--- ---  --- nginx.conf | nginx 主配置文件
+--- ---  --- conf.d | nginx副配置文件（站点nginx配置文件可存放在此目录下）
+--- --- php | PHP 服务目录 （包含常用PHP版本的 Dockerfile）
+--- --- redis | Redis 服务
+--- wwwroot | app 应用目录
+--- --- default | 默认测试文件
 
 ## 文档
 
-[Docker安装](docs/guide-zh-CN/docker-install.md) · [使用文档](docs/guide-zh-CN/usage.md) · [常用命令](docs/guide-zh-CN/start-command.md) 
+[Docker安装](docs/guide-zh-CN/docker-install.md) · [常用命令](docs/guide-zh-CN/start-command.md) 
+
+[comment]: <> ([Docker安装]&#40;docs/guide-zh-CN/docker-install.md&#41; · [使用文档]&#40;docs/guide-zh-CN/usage.md&#41; · [常用命令]&#40;docs/guide-zh-CN/start-command.md&#41; )
 
 ## 问题反馈
 
