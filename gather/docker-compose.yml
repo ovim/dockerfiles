@@ -37,6 +37,24 @@ services:
       dev:
         ipv4_address: 172.19.0.10
 
+  #  php73:
+  #    container_name: php73
+  #    # ovim 镜像
+  #    image: registry.cn-shanghai.aliyuncs.com/ovim/php:7.3-fpm
+  #    # 自定义镜像
+  #    #    build:
+  #    #      context: ../services/php/php73
+  #    restart: always
+  #    depends_on:
+  #      - nginx
+  #    volumes:
+  #      - ../wwwroot:/wwwroot:rw
+  #      - ../services/php/php73/configs/php.ini:/usr/local/etc/php/php.ini:rw
+  #      #      - ../services/php/php73/conf.d:/usr/local/etc/php/conf.d:rw
+  #    networks:
+  #      dev:
+  #        ipv4_address: 172.19.0.10
+
   php72:
     container_name: php72
     # ovim 镜像
@@ -61,6 +79,7 @@ services:
     restart: always
     depends_on:
       - php74
+      # - php73
       - php72
     environment:
       MYSQL_ROOT_PASSWORD: 123456
