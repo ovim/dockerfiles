@@ -53,3 +53,9 @@ QQ：[2556811689](https://jq.qq.com/?_wv=1027&k=4BeVA2r)
 [Docker 入门教程](http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)
 
 [Docker 微服务教程](http://www.ruanyifeng.com/blog/2018/02/docker-wordpress-tutorial.html)
+
+参考
+
+[jianyan's dockerfile](https://github.com/jianyan74/dockerfiles)
+
+[markhilton's docker-php-fpm](https://github.com/markhilton/docker-php-fpm)
