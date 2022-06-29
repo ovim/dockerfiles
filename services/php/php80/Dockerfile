@@ -1,5 +1,8 @@
 FROM php:8.0-fpm
 
+# 更换软件安装源
+RUN sed -i 's@http://deb.debian.org@http://mirrors.aliyun.com@g' /etc/apt/sources.list
+
 RUN apt-get update -y
 RUN apt-get -y install gcc make autoconf libc-dev pkg-config libzip-dev
 
