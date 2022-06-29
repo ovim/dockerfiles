@@ -22,10 +22,10 @@ services:
   php80:
     container_name: php80
     # ovim 镜像
-    # image: registry.cn-shanghai.aliyuncs.com/ovim/php:8.0-fpm
+    image: registry.cn-shanghai.aliyuncs.com/ovim/php:8.0-fpm
     # 自定义镜像
-    build:
-      context: ../services/php/php80
+    # build:
+    #   context: ../services/php/php80
     restart: always
     depends_on:
       - nginx
