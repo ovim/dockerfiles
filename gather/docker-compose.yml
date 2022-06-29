@@ -19,6 +19,24 @@ services:
       dev:
         ipv4_address: 172.19.0.2
 
+  php80:
+    container_name: php80
+    # ovim 镜像
+    # image: registry.cn-shanghai.aliyuncs.com/ovim/php:8.0-fpm
+    # 自定义镜像
+    build:
+      context: ../services/php/php80
+    restart: always
+    depends_on:
+      - nginx
+    volumes:
+      - ../wwwroot:/wwwroot:rw
+      - ../services/php/php80/configs/php.ini:/usr/local/etc/php/php.ini:rw
+      #      - ../services/php/php80/conf.d:/usr/local/etc/php/conf.d:rw
+    networks:
+      dev:
+        ipv4_address: 172.19.0.09
+
   php74:
     container_name: php74
     # ovim 镜像

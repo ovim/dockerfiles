@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  php80:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    hostname: php80
+    container_name: php80
+    volumes:
+      - ./configs:/cfgs
+    env_file: .env
+
+  redis:
+    image: redis:latest
