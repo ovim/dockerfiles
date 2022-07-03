@@ -29,6 +29,8 @@ services:
     restart: always
     depends_on:
       - nginx
+    ports:
+      - "9000":"9000"
     volumes:
       - ../wwwroot:/wwwroot:rw
       - ../services/php/php80/configs/php.ini:/usr/local/etc/php/php.ini:rw
@@ -47,6 +49,9 @@ services:
     restart: always
     depends_on:
       - nginx
+    ports:
+      - "9000":"9000"
+      - "2000:2000"
     volumes:
       - ../wwwroot:/wwwroot:rw
       - ../services/php/php74/configs/php.ini:/usr/local/etc/php/php.ini:rw
@@ -83,6 +88,8 @@ services:
     restart: always
     depends_on:
       - nginx
+    ports:
+      - "9000":"9000"
     volumes:
       - ../wwwroot:/wwwroot:rw
       - ../services/php/php72/configs/php.ini:/usr/local/etc/php/php.ini:rw
