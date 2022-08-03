@@ -29,6 +29,9 @@ services:
     restart: always
     depends_on:
       - nginx
+    ports:
+      - "9501:9501"
+      - "6379:6379"
     volumes:
       - ../wwwroot:/wwwroot:rw
       - ../services/php/php80/configs/php.ini:/usr/local/etc/php/php.ini:rw
@@ -57,7 +60,7 @@ services:
       dev:
         ipv4_address: 172.19.0.10
 
-  #  php73:
+  # php73:
   #    container_name: php73
   #    # ovim 镜像
   #    image: registry.cn-shanghai.aliyuncs.com/ovim/php:7.3-fpm
