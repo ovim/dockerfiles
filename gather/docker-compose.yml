@@ -100,6 +100,11 @@ services:
     container_name: mysql
     image: mysql:5.7
     restart: always
+    command: >
+      bash -c "
+      chmod 644 /etc/mysql/conf.d/*
+      && /entrypoint.sh mysqld
+      "
     depends_on:
       - php74
       # - php73
@@ -109,7 +114,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      # - ../services/mysql/conf:/etc/mysql
+      - ../services/mysql/conf.d:/etc/mysql/conf.d:rw
       - ../logs/mysql:/var/lib/mysql-logs:rw
       - ../data/mysql/data:/var/lib/mysql:rw
     networks:
