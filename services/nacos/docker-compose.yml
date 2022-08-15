@@ -1,0 +1,12 @@
+version: "3"
+services:
+  nacos:
+    container_name: nacos
+    image: nacos/nacos-server:v2.1.0
+    ports:
+      - "8848:8848"
+    environment:
+      - MODE=standalone
+      - JVM_XMS=512m
+      - JVM_XMN=256m
+    restart: always
