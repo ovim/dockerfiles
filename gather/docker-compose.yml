@@ -31,6 +31,7 @@ services:
       - nginx
     ports:
       - "9501:9501"
+      - "9502:9502"
       - "6379:6379"
     volumes:
       - ../wwwroot:/wwwroot:rw
