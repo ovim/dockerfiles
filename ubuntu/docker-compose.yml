@@ -1,0 +1,17 @@
+version: "3"
+services:
+  ubuntu:
+    container_name: ubuntu
+    # image: ubuntu:22.10
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    networks:
+      default:
+        ipv4_address: ${WORKSPACE_IP}
+networks:
+  default:
+    external:
+      name: dev_enviroment

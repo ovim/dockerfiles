@@ -1,0 +1,19 @@
+version: "3"
+services:
+  nacos:
+    container_name: nacos_dev
+    image: nacos/nacos-server:${NACOS_VERSION}
+    ports:
+      - "${NACOS_PORT}:8848"
+    environment:
+      - MODE=standalone
+      - JVM_XMS=${NACOS_JVM_XMS}
+      - JVM_XMN=${NACOS_JVM_XMN}
+    restart: always
+    networks:
+      default:
+        ipv4_address: ${NACOS_IP}
+networks:
+  default:
+    external:
+      name: dev_enviroment

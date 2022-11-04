@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mysql:
+    container_name: mysql_dev
+    image: mysql:${MYSQL_VERSION}
+    restart: always
+    command: >
+      bash -c "
+      chmod 644 /etc/mysql/conf.d/*
+      && /entrypoint.sh mysqld
+      "
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - ./conf.d:/etc/mysql/conf.d:rw
+      - ./log:/var/lib/mysql-logs:rw
+      - ./data:/var/lib/mysql:rw
+    networks:
+      default:
+        ipv4_address: ${MYSQL_IP}
+networks:
+  default:
+    external:
+      name: dev_enviroment

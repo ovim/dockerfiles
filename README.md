@@ -1,61 +1,204 @@
-<!--
- * @Author: your name
- * @Date: 2020-07-07 19:26:37
- * @LastEditTime: 2020-07-20 12:11:42
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /workspace/README.md
---> 
-## Dockerfiles
+## 简介
 
 搭建基础公用环境包，方便使用，支持业务不断的提升而需要一些软件的支持但由于本身不懂或耗时导致不方便安装升级的一种解决方案
 
-> 目前还没有完整的测试过请不要在生产环境中使用
+使用前请确保服务器已安装 `docker` `docker-compose` [安装参考](docker-install.md)
 
-## 简介
-用docker容器服务的方式搭建环境，易于维护、升级。使用前需了解Docker的基本概念，常用基本命令。 可以一条条命令执行docker命令来构建镜像，容器。这里推荐使用docker-compose来管理，执行项目，下面是使用流程。
+## 使用
 
-#### 目录
+### 目录介绍
 
-目录 | 说明
----|---
---- data | 数据库文件存储
---- --- mysql | mysql数据库文件
---- docs | 使用文档
---- gather | 快速启动包
---- --- docker-compose.yml | 一键启动 NMP（具体的启动项可编辑文件自由配置）
---- sercices | 服务软件配置包
---- --- elasticsearch | ElasticSearch 7.3.2
---- --- nginx | Nginx 服务
---- ---  --- nginx.conf | nginx 主配置文件
---- ---  --- conf.d | nginx副配置文件（站点nginx配置文件可存放在此目录下）
---- --- php | PHP 服务目录 （包含常用PHP版本的 Dockerfile）
---- --- redis | Redis 服务
---- wwwroot | app 应用目录
---- --- default | 默认测试文件
+|目录/文件 | 说明|
+|---|---|
+|**./init.sh** | **初始化脚本** |
+|**./start.sh** | **快速启动容器脚本** |
+|**./stop.sh** | **快速停止容器脚本** |
+|**./nginx/** | **Nginx 服务目录** |
+|./nginx/conf/nginx.conf | nginx.conf 目录 |
+|./nginx/conf/vhost | Nginx 站点配置文件目录 |
+|./nginx/log/ | Nginx 日志目录 |
+|**./php/** | **PHP 服务目录** |
+|./php/7.2/ | PHP7.2 服务目录 |
+|./php/7.2/configs/ | PHP7.2 主配置文件目录 (php.ini、www.conf) |
+|**./mysql/** | **MySQL服务目录** |
+|./mysql/conf.d/ | MySQL 主配置文件目录 (my.cnf) |
+|./mysql/data/ | MySQL 数据存储目录 |
+|./mysql/log/ | MySQL 运行日志目录 |
+|**./wwwroot/**| **app应用目录** |
 
-## 文档
+### 快速使用
 
-[Docker安装](docs/guide-zh-CN/docker-install.md) · [常用命令](docs/guide-zh-CN/start-command.md) 
+#### 预备
 
-[comment]: <> ([Docker安装]&#40;docs/guide-zh-CN/docker-install.md&#41; · [使用文档]&#40;docs/guide-zh-CN/usage.md&#41; · [常用命令]&#40;docs/guide-zh-CN/start-command.md&#41; )
+给快捷脚本添加可执行权限
+
+```shell
+chmod +x init.sh start.sh stop.sh
+```
+
+#### 初始化
+
+***执行命令对使用环境进行初始化***
+
+```shell
+./init.sh
+```
+
+> 脚本工作内容:
+> 
+> - 创建网段
+> - env初始化
+
+#### 启动
+
+***执行命令启动基础工作环境***
+
+```shell
+./start.sh
+```
+
+> 脚本工作内容:
+>
+> - 可根据自身需要启动工作环境 [Nginx、PHP7.2、PHP7.4、PHP8.0]
+
+#### 停止
+
+***执行命令停止基础工作环境***
+
+```shell
+./stop.sh
+```
+
+> 脚本工作内容:
+>
+> - 可根据自身需要停止工作环境 [Nginx、PHP7.2、PHP7.4、PHP8.0]
+
+#### 运行站点
+
+***运行测试站点***
+
+`./nginx/conf/vhost/default.conf` 中默认配置了 `http://dev.loc` 站点，务必在 `/etc/hosts` 中添加此域名
+
+浏览器访问 `http://dev.loc/index.php`
+
+***自行搭建站点***
+
+以 `http://new.loc` 为例
+
+0、
+
+配置域名解析
+
+```shell
+vim /etc/hosts
+# 在文件中添加以下内容
+127.0.0.1    new.loc
+```
+
+1、
+
+`./nginx/conf/vhost/` 目录下新增 `new.loc.conf` 文件
+
+`new.loc.conf` 参考：
+
+```conf
+server {
+        listen       80;
+        server_name  new.loc;
+
+        root   /wwwroot/new/;
+
+        location ~ \.php$ {
+            fastcgi_pass   php8.0:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME   $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+       }
+}
+```
+
+2、
+
+写站点的测试代码
+
+```shell
+vim ./wwwroot/new/index.php
+```
+
+`index.php` 参考：
+
+```php
+<?php
+
+phpinfo();
+```
+
+3、
+
+执行 `./start.sh` 启动环境 (若环境以启动，执行 `docker restart nginx` 重启 `Nginx` 即可)
+
+浏览器访问 `http://new.loc/index.php`
+
+
+### 进阶使用
+
+#### 了解 .env
+
+每个服务目录下与 `docker-composer.yml` 同级都有一个 `.env` 文件，用来配置常用的配置项，例如 IP、PORT等。具体可查看服务下的 `.env` 文件
+
+#### 了解服务
+
+| 服务 | IP   | PORT | 备注 |
+| ---- | ---- | ---- | ----|
+| 宿主机 | 172.172.0.1 |  |  |
+| Nginx | 172.172.0.2 | 80、443 |		 |
+| Redis | 172.172.0.3 | 6379 | 默认密码：`cloud@redis` |
+| Nacos | 172.172.0.4 | 8848 | 账号：`nacos` 密码：`nacos` |
+| MySQL5.7 | 172.172.0.5 | 3306 | 账号：`root` 密码：`root`；账号：`default` 密码：`default` |
+| ElasticSearch | 172.172.0.6 | 9200、9300 |  |
+| PHP7.2 | 172.172.0.7 | 9000 |  |
+| PHP7.4 | 172.172.0.8 | 9000 |  |
+| PHP8.0 | 172.172.0.9 | 9000 |  |
+| Ubuntu | 172.172.0.10 |  |  |
+
+#### 启动服务
+
+每个独立的服务下都配备有相关的 `docker-compose.yml`，在服务目录下执行 `docker-compose up -d` 进行启动即可
+
+#### PHP容器安装扩展
+
+***以在 `PHP8.0` 容器安装 `redis` 为例：***
+
+在 `http://pecl.php.net/` 中查看对应PHP版本对应的扩展版本
+
+执行安装命令，并重启对应 `PHP` 容器
+
+安装命令参考( `PHP8.0` 容器中执行)：
+
+```shell
+pecl install redis-5.1.0 && docker-php-ext-enable redis
+```
+
+重启命令参考：
+
+```shell
+docker restart php8.0
+```
+
+个别扩展需要在 `./php/8.0/configs/php.ini` 中启用才会生效
+```shell
+vim ./php/8.0/configs/php.ini
+# 在 php.ini 中添加以下内容
+extension=redis.so
+```
 
 ## 问题反馈
 
-在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
+在使用中有任何问题，欢迎反馈给我，点击意见反馈跟我交流
 
-QQ：[2556811689](https://jq.qq.com/?_wv=1027&k=4BeVA2r)
+<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=2bavsLS6tbasvZmoqPe6trQ" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_11.png"/></a>
 
-## 学习文档
+## TODO
 
-[Docker 配置详解](https://www.jianshu.com/p/2217cfed29d7)
-
-[Docker 入门教程](http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)
-
-[Docker 微服务教程](http://www.ruanyifeng.com/blog/2018/02/docker-wordpress-tutorial.html)
-
-参考
-
-[jianyan's dockerfile](https://github.com/jianyan74/dockerfiles)
-
-[markhilton's docker-php-fpm](https://github.com/markhilton/docker-php-fpm)
+- 容器的时区设置（现在为 `UTC`）
+- `node` 服务

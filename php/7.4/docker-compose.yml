@@ -1,0 +1,20 @@
+version: "3"
+services:
+  php74:
+    container_name: php7.4
+    # build:
+    #   context: ./
+    #   dockerfile: Dockerfile
+    image: registry.cn-hangzhou.aliyuncs.com/ovim/php:7.4-fpm
+    volumes:
+      - ../../wwwroot:/wwwroot:rw
+      - ./configs/php.ini:/usr/local/etc/php/php.ini:rw
+    #   - ./configs:/cfgs
+    # env_file: .env
+    networks:
+      default:
+        ipv4_address: ${PHP74_IP}
+networks:
+  default:
+    external:
+      name: dev_enviroment

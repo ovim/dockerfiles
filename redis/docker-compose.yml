@@ -1,0 +1,22 @@
+version: "3"
+services:
+  redis:
+    container_name: redis_dev
+    build:
+      context: ./
+      args:
+        - REDIS_VER=${REDIS_VERSION}
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:rw
+      - ./data:/data:rw
+      - ./log:/var/log/:rw
+    restart: always
+    networks:
+      default:
+        ipv4_address: ${REDIS_IP}
+networks:
+  default:
+    external:
+      name: dev_enviroment
