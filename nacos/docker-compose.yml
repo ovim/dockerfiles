@@ -1,7 +1,7 @@
 version: "3"
 services:
   nacos:
-    container_name: nacos_dev
+    container_name: nacos
     image: nacos/nacos-server:${NACOS_VERSION}
     ports:
       - "${NACOS_PORT}:8848"

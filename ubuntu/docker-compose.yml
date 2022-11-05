@@ -1,7 +1,7 @@
 version: "3"
 services:
   ubuntu:
-    container_name: ubuntu
+    container_name: ubuntu_dev
     # image: ubuntu:22.10
     build:
       context: ./

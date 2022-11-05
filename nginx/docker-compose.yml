@@ -3,7 +3,7 @@ services:
   nginx:
     # env_file:
     #   - ../.env
-    container_name: nginx_dev
+    container_name: nginx
     image: nginx:${NGINX_VERSION}
     # build:
     #   context: ./
