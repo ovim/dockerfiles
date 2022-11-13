@@ -94,8 +94,8 @@ RUN pecl install redis-5.3.7 && \
     docker-php-ext-enable redis
 
 # install swoole
-RUN pecl install -D 'enable-sockets="yes" enable-openssl="yes" enable-mysqlnd="yes" enable-swoole-curl="yes" enable-cares="yes"' swoole-5.0.0 && \
-    docker-php-ext-enable swoole
+# RUN pecl install -D 'enable-sockets="yes" enable-openssl="yes" enable-mysqlnd="yes" enable-swoole-curl="yes" enable-cares="yes"' swoole-5.0.0 && \
+#     docker-php-ext-enable swoole
 
 # install APCu
 RUN pecl install apcu && \
