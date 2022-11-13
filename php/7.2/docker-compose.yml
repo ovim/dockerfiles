@@ -1,6 +1,6 @@
 version: "3"
 services:
-  php72:
+  php7.2:
     container_name: php7.2
     # build:
     #   context: ./
@@ -9,8 +9,7 @@ services:
     volumes:
       - ../../wwwroot:/wwwroot:rw
       - ./configs/php.ini:/usr/local/etc/php/php.ini:rw
-    #   - ./configs:/cfgs
-    # env_file: .env
+      - ./configs/conf.d/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:rw
     networks:
       default:
         ipv4_address: ${PHP72_IP}

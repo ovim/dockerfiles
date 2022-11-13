@@ -200,5 +200,5 @@ extension=redis.so
 
 ## TODO
 
-- 容器的时区设置（现在为 `UTC`）
+- `PHP7.2`、`PHP7.4` 安装 `Swoole`
 - `node` 服务

@@ -33,7 +33,7 @@ RUN apt-get update -y && \
 	zlib1g-dev libgd-dev \
 	libtidy-dev libxslt1-dev libmagic-dev libexif-dev file \
 	sqlite3 libsqlite3-dev libxslt-dev \
-	libmhash2 libmhash-dev libc-client-dev libkrb5-dev libssh2-1-dev \
+	libmhash2 libmhash-dev libc-client-dev libkrb5-dev libssh2-1-dev libc-ares-dev \
 	unzip libpcre3 libpcre3-dev \
 	poppler-utils ghostscript libmagickwand-6.q16-dev libsnmp-dev libedit-dev libreadline6-dev libsodium-dev \
 	freetds-bin freetds-dev freetds-common libct4 libsybdb5 tdsodbc libreadline-dev librecode-dev libpspell-dev libonig-dev && \
@@ -67,12 +67,28 @@ RUN docker-php-ext-install bcmath bz2 calendar ctype curl dba dom && \
 RUN pecl install ds && \
 	pecl install imagick && \
 	pecl install igbinary && \
-    pecl install memcache-4.0.5.2 && \
-	pecl install memcached && \
 	pecl install mcrypt && \
-    pecl install mongodb && \
-    pecl install redis-5.3.7 && \
-	docker-php-ext-enable ds imagick igbinary memcache memcached mongodb redis
+	docker-php-ext-enable ds imagick igbinary mcrypt
+
+# install memcache
+RUN pecl install memcache-4.0.5.2 && \
+    docker-php-ext-enable memcache
+
+# install memcached
+RUN pecl install memcached && \
+    docker-php-ext-enable memcached
+
+# install mongodb
+RUN pecl install mongodb && \
+    docker-php-ext-enable mongodb
+
+# install redis
+RUN pecl install redis-5.3.7 && \
+    docker-php-ext-enable redis
+
+# install swoole
+RUN pecl install -D 'enable-sockets="yes" enable-openssl="yes" enable-mysqlnd="yes" enable-swoole-curl="yes" enable-cares="yes"' swoole-5.0.0 && \
+    docker-php-ext-enable swoole
 
 # install APCu
 RUN pecl install apcu && \
@@ -117,21 +133,21 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
 # Final Touches
 #--------------------------------------------------------------------------
 # install NewRelic agent
-RUN echo 'deb [trusted=yes] http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list && \
-	curl https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
-	apt-get -y update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -y install newrelic-php5 newrelic-sysmond && \
-	export NR_INSTALL_SILENT=1 && newrelic-install install
+# RUN echo 'deb [trusted=yes] http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list && \
+# 	curl https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
+# 	apt-get -y update && \
+# 	DEBIAN_FRONTEND=noninteractive apt-get -y install newrelic-php5 newrelic-sysmond && \
+# 	export NR_INSTALL_SILENT=1 && newrelic-install install
 
-# # install SendGrid
-RUN echo "postfix postfix/mailname string localhost" | debconf-set-selections && \
-	echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections && \
-	DEBIAN_FRONTEND=noninteractive apt-get install postfix libsasl2-modules -y
+# # # install SendGrid
+# RUN echo "postfix postfix/mailname string localhost" | debconf-set-selections && \
+# 	echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections && \
+# 	DEBIAN_FRONTEND=noninteractive apt-get install postfix libsasl2-modules -y
 
-# Health check
-RUN echo '#!/bin/bash' > /healthcheck && \
-	echo 'env -i SCRIPT_NAME=/health SCRIPT_FILENAME=/health REQUEST_METHOD=GET cgi-fcgi -bind -connect 127.0.0.1:9000 || exit 1' >> /healthcheck && \
-	chmod +x /healthcheck
+# # Health check
+# RUN echo '#!/bin/bash' > /healthcheck && \
+# 	echo 'env -i SCRIPT_NAME=/health SCRIPT_FILENAME=/health REQUEST_METHOD=GET cgi-fcgi -bind -connect 127.0.0.1:9000 || exit 1' >> /healthcheck && \
+# 	chmod +x /healthcheck
 
 # set locale to utf-8
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
