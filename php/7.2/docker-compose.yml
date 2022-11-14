@@ -15,5 +15,4 @@ services:
         ipv4_address: ${PHP72_IP}
 networks:
   default:
-    external:
-      name: dev_enviroment
+    name: dev_enviroment

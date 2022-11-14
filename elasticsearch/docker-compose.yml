@@ -31,5 +31,4 @@ services:
         ipv4_address: ${ELASTICSEARCH_IP}
 networks:
   default:
-    external:
-      name: dev_enviroment
+    name: dev_enviroment

@@ -18,5 +18,4 @@ services:
         ipv4_address: ${REDIS_IP}
 networks:
   default:
-    external:
-      name: dev_enviroment
+    name: dev_enviroment
