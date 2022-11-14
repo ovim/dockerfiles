@@ -9,8 +9,8 @@ if [ -f $nowPath"/init.lock" ];then
 fi
 
 # 创建网段
-# docker network create --subnet=172.172.0.0/24 dev_enviroment
-# echo "网段初始化完成 [172.172.0.0/24]"
+docker network create --subnet=172.172.0.0/24 dev_enviroment
+echo "网段初始化完成 [172.172.0.0/24]"
 
 # env init
 cd $nowPath"/elasticsearch/"

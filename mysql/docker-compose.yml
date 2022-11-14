@@ -16,9 +16,9 @@ services:
     ports:
       - "${MYSQL_PORT}:3306"
     volumes:
-      - ./conf.d:/etc/mysql/conf.d:rw
-      - ./log:/var/lib/mysql-logs:rw
-      - ./data:/var/lib/mysql:rw
+      - ./conf.d/:/etc/mysql/conf.d/:rw
+      - ./log/:/var/lib/mysql-logs/:rw
+      - ./data/:/var/lib/mysql/:rw
     networks:
       default:
         ipv4_address: ${MYSQL_IP}

@@ -9,13 +9,6 @@ if [ ! -f $nowPath"/nginx/.env" ];then
     exit
 fi
 
-read -p "是否启动Nginx  [y/n] : " nginxIsStart
-if [ $nginxIsStart == "y" ]; then
-    cd $nowPath"/nginx/"
-    docker-compose up -d
-    echo "nginx status: run"
-fi
-
 read -p "是否启动PHP7.2  [y/n] : " php72IsStart
 if [ $php72IsStart == "y" ]; then
     cd $nowPath"/php/7.2/"
@@ -35,6 +28,13 @@ if [ $php80IsStart == "y" ]; then
     cd $nowPath"/php/8.0/"
     docker-compose up -d
     echo "php8.0 status: run"
+fi
+
+read -p "是否启动Nginx  [y/n] : " nginxIsStart
+if [ $nginxIsStart == "y" ]; then
+    cd $nowPath"/nginx/"
+    docker-compose up -d
+    echo "nginx status: run"
 fi
 
 echo "========== Enjoy your time =========="

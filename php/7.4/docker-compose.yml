@@ -7,9 +7,10 @@ services:
     #   dockerfile: Dockerfile
     image: registry.cn-hangzhou.aliyuncs.com/ovim/php:7.4-fpm
     volumes:
-      - ../../wwwroot:/wwwroot:rw
+      - ${PROJECT_PATH}:/wwwroot/:rw
       - ./configs/php.ini:/usr/local/etc/php/php.ini:rw
       - ./configs/conf.d/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:rw
+      - ./configs/conf.d/docker-php-ext-swoole.ini:/usr/local/etc/php/conf.d/docker-php-ext-swoole.ini:rw
     networks:
       default:
         ipv4_address: ${PHP74_IP}

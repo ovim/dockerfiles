@@ -9,7 +9,7 @@ services:
     ports:
       - "9501:9501"
     volumes:
-      - ../../wwwroot:/wwwroot:rw
+      - ${PROJECT_PATH}:/wwwroot/:rw
       - ./configs/php.ini:/usr/local/etc/php/php.ini:rw
       - ./configs/conf.d/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:rw
       - ./configs/conf.d/docker-php-ext-swoole.ini:/usr/local/etc/php/conf.d/docker-php-ext-swoole.ini:rw

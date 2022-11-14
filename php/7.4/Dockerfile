@@ -86,9 +86,9 @@ RUN pecl install mongodb && \
 RUN pecl install redis-5.3.7 && \
     docker-php-ext-enable redis
 
-# install swoole
-# RUN pecl install -D 'enable-sockets="yes" enable-openssl="yes" enable-mysqlnd="yes" enable-swoole-curl="yes" enable-cares="yes"' swoole-5.0.0 && \
-#     docker-php-ext-enable swoole
+# install swoole-4.8.12
+RUN pecl install -D 'enable-sockets="yes" enable-openssl="yes" enable-mysqlnd="yes" enable-swoole-curl="yes" enable-cares="yes" enable-http2="yes" enable-swoole-json="yes"' swoole-4.8.12 && \
+    docker-php-ext-enable swoole
 
 # install APCu
 RUN pecl install apcu && \
@@ -100,9 +100,6 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 # install msgpack
 RUN pecl install msgpack && \
 	docker-php-ext-enable msgpack
-
-# install swoole-4.8.12
-RUN pecl install swoole-4.8.12 && docker-php-ext-enable swoole
 
 # install composer
 RUN EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)" && \

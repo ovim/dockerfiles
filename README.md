@@ -158,7 +158,7 @@ phpinfo();
 | ElasticSearch | 172.172.0.6 | 9200、9300 |  |
 | PHP7.2 | 172.172.0.7 | 9000 |  |
 | PHP7.4 | 172.172.0.8 | 9000 |  |
-| PHP8.0 | 172.172.0.9 | 9000 |  |
+| PHP8.0 | 172.172.0.9 | 9000、9501 |  |
 | Ubuntu | 172.172.0.10 |  |  |
 
 #### 启动服务
@@ -185,12 +185,15 @@ pecl install redis-5.1.0 && docker-php-ext-enable redis
 docker restart php8.0
 ```
 
-个别扩展需要在 `./php/8.0/configs/php.ini` 中启用才会生效
-```shell
-vim ./php/8.0/configs/php.ini
-# 在 php.ini 中添加以下内容
-extension=redis.so
-```
+> 快速启用/停用扩展
+> 
+> 1、将容器内 `/usr/local/etc/php/conf.d/` 中的对应扩展配置文件 复制到宿主机的 `./php/8.0/configs/conf.d/` 目录中
+> 
+> 2、修改对应服务的 `docker-compose.yml` 中的挂载文件， 新增挂载
+> 
+> `- ./configs/conf.d/docker-php-ext-redis.ini:/usr/local/etc/php/conf.d/docker-php-ext-redis.ini:rw`
+
+
 
 ## 问题反馈
 
@@ -200,5 +203,4 @@ extension=redis.so
 
 ## TODO
 
-- `PHP7.2`、`PHP7.4` 安装 `Swoole`
 - `node` 服务
