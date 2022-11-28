@@ -36,7 +36,7 @@ RUN apt-get update -y && \
 	libmhash2 libmhash-dev libc-client-dev libkrb5-dev libssh2-1-dev libc-ares-dev \
 	unzip libpcre3 libpcre3-dev \
 	poppler-utils ghostscript libmagickwand-6.q16-dev libsnmp-dev libedit-dev libreadline6-dev libsodium-dev \
-	freetds-bin freetds-dev freetds-common libct4 libsybdb5 tdsodbc libreadline-dev librecode-dev libpspell-dev libonig-dev && \
+	freetds-bin freetds-dev freetds-common libct4 libsybdb5 tdsodbc libreadline-dev librecode-dev libpspell-dev libonig-dev expect && \
     # fix for docker-php-ext-install pdo_dblib
     # https://stackoverflow.com/questions/43617752/docker-php-and-freetds-cannot-find-freetds-in-know-installation-directories
     ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/ && \
