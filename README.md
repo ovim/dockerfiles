@@ -193,7 +193,9 @@ docker restart php8.0
 > 
 > `- ./configs/conf.d/docker-php-ext-redis.ini:/usr/local/etc/php/conf.d/docker-php-ext-redis.ini:rw`
 
+### 离线使用
 
+[离线操作文档](./offline-use.md)
 
 ## 问题反馈
 
