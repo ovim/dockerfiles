@@ -3,6 +3,8 @@ services:
   mysql:
     container_name: mysql
     image: mysql:${MYSQL_VERSION}
+    # 将在哪个平台上执行服务的构建
+    # platform: linux/x86_64
     restart: always
     command: >
       bash -c "
