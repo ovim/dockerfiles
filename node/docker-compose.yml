@@ -1,0 +1,19 @@
+version: "3"
+services:
+  node:
+    container_name: node
+    image: node:${NODE_VERSION}
+    # build:
+    #   context: ./
+    ports:
+      - "${NODE_PORT}:3000"
+    volumes:
+      - ../wwwroot/:/wwwroot:rw
+    tty: true
+    restart: always
+    networks:
+      default:
+        ipv4_address: ${NODE_IP}
+networks:
+  default:
+    name: dev_enviroment
