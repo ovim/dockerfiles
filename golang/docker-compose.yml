@@ -1,0 +1,19 @@
+version: "3"
+services:
+  golang:
+    container_name: golang
+    image: golang:${GOLANG_VERSION}
+    # build:
+    #   context: ./
+    ports:
+      - "${GOLANG_PORT}:80"
+    volumes:
+      - ../wwwroot/:/wwwroot:rw
+    tty: true
+    restart: always
+    networks:
+      default:
+        ipv4_address: ${GOLANG_IP}
+networks:
+  default:
+    name: dev_enviroment
