@@ -204,7 +204,3 @@ docker restart php8.0
 在使用中有任何问题，欢迎反馈给我，点击意见反馈跟我交流
 
 <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=2bavsLS6tbasvZmoqPe6trQ" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_11.png"/></a>
-
-## TODO
-
-- `node` 服务
