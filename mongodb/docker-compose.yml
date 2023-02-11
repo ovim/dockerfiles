@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mongodb:
+    container_name: mongodb
+    # image: mongo-db:${MONGODB_VERSION}
+    build:
+      context: .
+      args:
+        - MONGODB_VER=${MONGODB_VERSION}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_root_username}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_root_password}
+    restart: always
+    ports:
+      - "${MONGODB_PORT}:27017"
+    volumes:
+      # - ./conf.d/:/etc/mysql/conf.d/:rw
+      - ./log/:/var/log/mongodb/:rw
+      - ./data/:/var/lib/mongodb/:rw
+    networks:
+      default:
+        ipv4_address: ${MONGODB_IP}
+networks:
+  default:
+    name: dev_enviroment
