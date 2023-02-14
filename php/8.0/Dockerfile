@@ -42,6 +42,8 @@ RUN apt-get update -y && \
     ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/ && \
     docker-php-ext-install pdo_dblib
 
+RUN apt-get install -y supervisor
+
 RUN docker-php-ext-install bcmath bz2 calendar ctype curl dba dom && \
     docker-php-ext-install fileinfo exif ftp gettext gmp && \
     docker-php-ext-install intl ldap mbstring mysqli && \
@@ -106,7 +108,7 @@ RUN EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
 # install MSSQL support and ODBC driver
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
 	curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
-	apt-get update -y && \
+	# apt-get update -y && \
 	ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 && \
 	apt-get install -y unixodbc-dev libgssapi-krb5-2 && \
     # MSSQL extension
