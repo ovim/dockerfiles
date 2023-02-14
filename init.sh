@@ -37,6 +37,15 @@ cp .env.example .env
 cd $nowPath"/redis/"
 cp .env.example .env
 
+cd $nowPath"/golang/"
+cp .env.example .env
+
+cd $nowPath"/mongodb/"
+cp .env.example .env
+
+cd $nowPath"/node/"
+cp .env.example .env
+
 echo ".env 初始化完成"
 
 
