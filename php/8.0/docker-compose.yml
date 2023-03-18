@@ -15,7 +15,7 @@ services:
       - "10002:10002/tcp"
       - "10003:10003/udp"
       - "10004:10004/udp"
-      - "10005:10005/tcp"
+      - "10005:10005/udp"
       - "10006:10006/udp"
     volumes:
       - ${PROJECT_PATH}:/wwwroot/:rw
