@@ -25,6 +25,7 @@ services:
       # supervisor config
       - ./supervisor_conf/supervisord.conf:/etc/supervisor/supervisord.conf:rw
       - ./supervisor_conf/conf.d/:/etc/supervisor/conf.d:rw
+    privileged: true
     networks:
       default:
         ipv4_address: ${PHP80_IP}

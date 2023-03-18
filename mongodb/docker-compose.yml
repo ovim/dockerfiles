@@ -7,16 +7,20 @@ services:
       context: .
       args:
         - MONGODB_VER=${MONGODB_VERSION}
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_root_username}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_root_password}
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGODB_root_username}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_root_password}
     restart: always
     ports:
       - "${MONGODB_PORT}:27017"
     volumes:
-      # - ./conf.d/:/etc/mysql/conf.d/:rw
       - ./log/:/var/log/mongodb/:rw
       - ./data/:/var/lib/mongodb/:rw
+      - ./conf/mongod.conf:/etc/mongo/mongod.conf
+    command: >
+      bash -c "
+      mongod --config /etc/mongo/mongod.conf && tail -f /dev/null
+      "
     networks:
       default:
         ipv4_address: ${MONGODB_IP}
