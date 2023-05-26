@@ -11,12 +11,8 @@ services:
       # supervisor 面板端口
       - "9001:9001"
       # udp、tcp端口
-      - "10001:10001/udp"
-      - "10002:10002/tcp"
-      - "10003:10003/udp"
-      - "10004:10004/udp"
-      - "10005:10005/udp"
-      - "10006:10006/udp"
+      - "10001-10020:10001-10020/tcp"
+      - "10001-10020:10001-10020/udp"
     volumes:
       - ${PROJECT_PATH}:/wwwroot/:rw
       - ./configs/php.ini:/usr/local/etc/php/php.ini:rw
