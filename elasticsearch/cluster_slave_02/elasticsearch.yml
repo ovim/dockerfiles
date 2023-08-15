@@ -4,9 +4,9 @@
 # 集群名称
 cluster.name: "EsClusterByOvim"
 # 当前节点名称
-node.name: node_02
+node.name: "slave_node_01"
 # 当前节点是否有资格竞选主节点
-node.master: true
+node.master: false
 # 当前节点是否存储数据
 node.data: true
 
@@ -18,7 +18,7 @@ gateway.recover_after_nodes: 1
 # 配置集群的主机地址 已废弃
 # discovery.zen.ping.unicast.hosts: ["172.172.0.1:9300", "172.172.0.1:9301"]
 # 初始主节点，使用一组初始的符合主条件的节点引导集群
-cluster.initial_master_nodes: ["node_0"]
+cluster.initial_master_nodes: ["master_node_01"]
 # 节点等待响应时间，默认值是30秒，增加这个值，从一定程度上会减少误判导致脑裂
 discovery.zen.ping_timeout: 30s
 discovery.seed_hosts: ["172.172.0.6:9200", "172.172.0.14:9201", "172.172.0.15:9202"]
