@@ -70,6 +70,12 @@ RUN pecl install ds && \
 	pecl install mcrypt && \
 	docker-php-ext-enable ds imagick igbinary mcrypt
 
+# install phalcon
+RUN pecl install phalcon-4.1.2 && \
+  docker-php-ext-enable phalcon && \
+  pecl install psr-1.2.0 && \
+  docker-php-ext-enable psr
+
 # install memcache
 RUN pecl install memcache-4.0.5.2 && \
     docker-php-ext-enable memcache

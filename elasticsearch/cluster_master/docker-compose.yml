@@ -1,0 +1,38 @@
+version: '3.0'
+services:
+  elasticsearch:
+    container_name: elasticsearch_master
+    build:
+      context: .
+      args:
+        - ES_VER=${ELASTICSEARCH_VERSION}
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    restart: always
+    volumes:
+      - ./data/plugins/:/usr/share/elasticsearch/plugins/
+      - ./data/:/usr/share/elasticsearch/data/
+      - ./log/:/usr/share/elasticsearch/logs/
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+
+  # elasticsearch-head:
+  #   image: salgat/elasticsearch-head
+  #   ports:
+  #     - "9100:9100"
+    networks:
+      default:
+        ipv4_address: ${ELASTICSEARCH_IP}
+networks:
+  default:
+    name: dev_enviroment

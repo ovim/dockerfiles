@@ -1,14 +1,14 @@
 version: '3.0'
 services:
-  elasticsearch: # 相关文档 https://hub.docker.com/_/elasticsearch
-    container_name: elasticsearch
+  elasticsearch:
+    container_name: elasticsearch_slave_02
     build:
       context: .
       args:
         - ES_VER=${ELASTICSEARCH_VERSION}
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9202:9200"
+      - "9302:9300"
     environment:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -16,6 +16,10 @@ services:
       memlock:
         soft: -1
         hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    restart: always
     volumes:
       - ./data/plugins/:/usr/share/elasticsearch/plugins/
       - ./data/:/usr/share/elasticsearch/data/
@@ -25,7 +29,7 @@ services:
   # elasticsearch-head:
   #   image: salgat/elasticsearch-head
   #   ports:
-  #     - "9100:9100"
+  #     - "9102:9100"
     networks:
       default:
         ipv4_address: ${ELASTICSEARCH_IP}

@@ -1,0 +1,43 @@
+# 单节点模式
+# discovery.type: single-node
+
+# 集群名称
+cluster.name: "EsClusterByOvim"
+# 当前节点名称
+node.name: node_0
+# 当前节点是否有资格竞选主节点
+node.master: true 
+# 当前节点是否存储数据
+node.data: true
+
+# 集群最少主节点数量，通常为 (可成为主节点的主机数目 / 2) + 1
+discovery.zen.minimum_master_nodes: 1
+# 集群最少正常工作节点数
+gateway.recover_after_nodes: 1
+# 配置集群的主机地址
+# discovery.zen.ping.unicast.hosts: ["172.172.0.1:9300", "172.172.0.1:9301"]
+# 初始主节点，使用一组初始的符合主条件的节点引导集群
+cluster.initial_master_nodes: ["node_0"]
+# 节点等待响应时间，默认值是30秒，增加这个值，从一定程度上会减少误判导致脑裂
+discovery.zen.ping_timeout: 30s
+discovery.seed_hosts: ["172.172.0.6:9200", "172.172.0.14:9201", "172.172.0.15:9202"]
+# 禁用交换内存，提升效率
+# bootstrap.memory_lock: true
+
+
+# 设置网络，如果是本机的话就是127.0.0.1，其他服务器配置对应的IP地址即可(0.0.0.0支持外网访问)
+network.host: 0.0.00
+# 设置其他节点和改节点交互的本机器的ip地址，各自为
+network.publish_host: 172.172.0.6
+# 设置映射端口
+http.port: 9200
+# 已废弃
+# transport.tcp.port: 9300
+
+# 支持跨域访问
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+# 密码验证
+# xpack.security.enabled: true
+# xpack.security.transport.ssl.enabled: true

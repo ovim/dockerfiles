@@ -155,7 +155,9 @@ phpinfo();
 | Redis | 172.172.0.3 | 6379 | 默认密码：`cloud@redis` |
 | Nacos | 172.172.0.4 | 8848 | 账号：`nacos` 密码：`nacos` |
 | MySQL5.7 | 172.172.0.5 | 3306 | 账号：`root` 密码：`root`；账号：`default` 密码：`default` |
-| ElasticSearch | 172.172.0.6 | 9200、9300 |  |
+| ElasticSearch_cluster_master | 172.172.0.6 | 9200、9300 | Es集群-主节点 |
+| ElasticSearch_cluster_slave_01 | 172.172.0.14 | 9201、9301 | Es集群-子节点01 |
+| ElasticSearch_cluster_slave_02 | 172.172.0.15 | 9202、9302 | Es集群-子节点02 |
 | PHP7.2 | 172.172.0.7 | 9000 |  |
 | PHP7.4 | 172.172.0.8 | 9000 |  |
 | PHP8.0 | 172.172.0.9 | 9000、9501 |  |
