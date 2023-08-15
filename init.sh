@@ -13,9 +13,6 @@ docker network create --subnet=172.172.0.0/24 dev_enviroment
 echo "网段初始化完成 [172.172.0.0/24]"
 
 # env init
-cd $nowPath"/elasticsearch/"
-cp .env.example .env
-
 cd $nowPath"/mysql/"
 cp .env.example .env
 
