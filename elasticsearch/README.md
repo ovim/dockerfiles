@@ -12,6 +12,9 @@ https://hub.docker.com/_/elasticsearch
 (每个节点都需要配置此项)
 chmod -R 777 log/ data/
 
+(设置数据备份目录写入权限)
+chmod -R 777 backup
+
 ## 调整内存限制
 
 每个节点的 `docker-compose.yml` 里的配置项 `ES_JAVA_OPTS`，所有节点的内存配置项 `ES_JAVA_OPTS` 累加不能超过服务器内存的80%

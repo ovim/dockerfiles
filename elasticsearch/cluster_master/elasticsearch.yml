@@ -39,6 +39,9 @@ http.port: 9200
 http.cors.enabled: true
 http.cors.allow-origin: "*"
 
+# 数据备份目录
+path.repo: ["/usr/local/elasticsearch/snapshot"]
+
 # 密码验证
 # xpack.security.enabled: true
 # xpack.security.transport.ssl.enabled: true

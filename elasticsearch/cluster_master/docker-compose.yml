@@ -25,6 +25,7 @@ services:
       - ./data/:/usr/share/elasticsearch/data/
       - ./log/:/usr/share/elasticsearch/logs/
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ../backup/:/usr/local/elasticsearch/snapshot
 
   # elasticsearch-head:
   #   image: salgat/elasticsearch-head
