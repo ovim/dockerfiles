@@ -26,3 +26,15 @@ cat /proc/sys/vm/max_map_count
 sudo sysctl -w vm.max_map_count=262144
 cat /proc/sys/vm/max_map_count
 ```
+
+## 配置密码
+
+打开 `elasticsearch.yml` 配置项 `xpack.security.enabled: true`
+
+进入对应 `ES` 容器执行以下命令
+
+```
+cd /usr/share/elasticsearch
+bin/elasticsearch-keystore create
+bin/elasticsearch-setup-passwords interactive
+```
